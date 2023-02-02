@@ -1,0 +1,9 @@
+
+
+<img (load)="imgLoaded()" (error)="imgError()" [src]="img" alt="" *ngIf="img; else elseBlock">
+<!-- el evento load lo usamos para hacer equis funcion cuando la imagen carga, en este caso lo usaremos para emitir informacion al padre -->
+<ng-template #elseBlock>
+  <p>imagen por defecto </p>
+</ng-template>
+
+<!-- <h3>{{counter}}</h3> -->

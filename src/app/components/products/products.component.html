@@ -1,0 +1,11 @@
+
+<div class="products--grid">
+  <app-product (addedProduct)="onAddToShoppingCart($event)" [product]="product" *ngFor="let product of products"></app-product>
+  <p>Monto Total {{montoTotal}}</p>
+  <p>Today: {{today | date: 'short'}}</p>
+  <p>Today: {{date2 | timeAgo }}</p>
+  <p>Today: {{today | date: 'dd/MM/yyyy'}}</p>
+  <!-- Esto es un PIPE!, short representa un formato especifico (leer documentacion) -->
+  <p>{{'hOla COmo EStAs' | uppercase}}</p>
+  <!-- Como podemos ver los PIPES se usan solo dentro de {{}} -->
+</div>

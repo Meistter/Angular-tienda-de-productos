@@ -1,0 +1,7 @@
+<app-img [img]="product.image"></app-img>
+<h2>{{product.price | currency: 'Bs'}}</h2>
+<!-- Esto es un PIPE, se usa solo en html -->
+<p>{{product.title | reverse}}</p>
+<!-- este es un pipe personalizado -->
+<p appHighlight>{{product.description}}</p>
+<button (click)="onAddToCart()">Agregar al Carrito</button>
