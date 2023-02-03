@@ -26,7 +26,7 @@ export class ProductComponent {
   @Output() showProduct = new EventEmitter<string>(); //haremos un output para enviarle el id al detalle de producto
 
   onShowDetail(){
-    this.showProduct.emit(this.product.id)
+    this.showProduct.emit(this.product.id) //aqui emitimos el id
 
   }
 

@@ -1,7 +1,7 @@
 <button (click)="toggleProductDetail()">click</button>
 <div class="products--grid">
   <app-product (showProduct)="onShowDetail($event)" (addedProduct)="onAddToShoppingCart($event)" [product]="product" *ngFor="let product of products"></app-product>
-<!-- aqui recibimos la emicion del id con el evento showProduct -->
+<!-- aqui recibimos la emicion del id con el evento showProduct  y ejecutamos el onShowDetail enviandole el id-->
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
   <div>

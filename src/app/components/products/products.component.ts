@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit{
     this.showProductDetail = !this.showProductDetail
   }
   onShowDetail(id: string){ //aqui recibimos el id del producto que es emitido
-    this.producService.getProduct(id).subscribe(data => {console.log('product', data);
-    })
+    this.producService.getProduct(id).subscribe(data => {console.log('product', data); //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
+    }) //en este caso la data solo la mostramos por consola
   }
 }
