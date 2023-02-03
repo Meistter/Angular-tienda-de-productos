@@ -46,7 +46,7 @@ export class ImgComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
  // eslint-disable-next-line @angular-eslint/no-input-rename
  @Input('img') set changeImg(newImg: string){ //el 'img' representa el nombre con el que queremos que el input vaya hacia el html
   this.img = newImg
-  console.log('cambio la imagen =>',this.img);
+
 
  }
  @Input() alt = ''
@@ -58,14 +58,15 @@ export class ImgComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
  counterFn: number | undefined
  imgDefault = 'https://www.m2crowd.com/core/i/placeholder.png'
 
+ imgError(){
+  this.img = this.imgDefault
+ }
 
  imgLoaded(){
-  console.log('loaded hijo');
+
   this.loaded.emit(this.img) //entre parentesis mandamos la información a transmitir
 
  }
 
- imgError(){
-  this.img = this.imgDefault
- }
+
 }

@@ -6,13 +6,17 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductsService {
-
+  private API = 'https://young-sands-07814.herokuapp.com/api/products'
   constructor(private http: HttpClient) { }
 
   getAllProducts(){
     //nosotros estamos manejando los productos basados en un modelo que hicimos, por lo tanto para no tener errores
     //debemos indicarle a la peticion que lo que va a obtener es un array de tipo Product, y lo hacemos asi:
     // <Product[]>
-    return this.http.get<Product[]>('https://fakestoreapi.com/products')
+    return this.http.get<Product[]>(this.API)
+  }
+
+  getProduct(id: string){
+    return this.http.get<Product>(`${this.API}/${id}`)
   }
 }
