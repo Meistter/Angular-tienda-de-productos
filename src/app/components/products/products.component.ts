@@ -23,6 +23,17 @@ export class ProductsComponent implements OnInit{
   date2 = new Date(2020, 1, 11)
   montoTotal = 0
   showProductDetail = false
+  productSelected : Product = {
+    id: '',
+    title: '',
+    price: 0,
+    images: [],
+    description: '',
+    category: {
+      id: '',
+      name: ''
+    }
+  }
 
   onAddToShoppingCart(product: Product){
     this.storeService.addProduct(product) //aqui en lugar de hacer la logica para añadir el producto estamos usando un servicio que nos añade la lógica necesaria
@@ -32,7 +43,8 @@ export class ProductsComponent implements OnInit{
     this.showProductDetail = !this.showProductDetail
   }
   onShowDetail(id: string){ //aqui recibimos el id del producto que es emitido
-    this.producService.getProduct(id).subscribe(data => {console.log('product', data); //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
-    }) //en este caso la data solo la mostramos por consola
+    this.producService.getProduct(id).subscribe(data => {this.productSelected = data; this.toggleProductDetail() //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
+
+  }) //en este caso la data solo la mostramos por consola
   }
 }

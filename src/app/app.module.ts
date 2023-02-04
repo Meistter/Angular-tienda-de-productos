@@ -14,6 +14,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,12 +27,14 @@ import { HighlightDirective } from './directives/highlight.directive';
     HighlightDirective
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
