@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit{
       {
       title: 'Articulo de Prueba',
       price: 1000,
-      images: [''],
+      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
       description: 'Hola esta es mi prueba ',
       categoryId:2
       }
