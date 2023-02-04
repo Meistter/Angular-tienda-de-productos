@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product.model';
+import { CreateProductDTO, Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 @Component({
@@ -47,4 +47,21 @@ export class ProductsComponent implements OnInit{
 
   }) //en este caso la data solo la mostramos por consola
   }
+
+  createNewProduct()
+  {
+      const product: CreateProductDTO =
+      {
+      title: 'Articulo de Prueba',
+      price: 1000,
+      images: [''],
+      description: 'Hola esta es mi prueba ',
+      categoryId:2
+      }
+
+  this.producService.create(product).subscribe(data=>{console.log('created',data)})
+  }
+
+
+
 }

@@ -11,3 +11,14 @@ export interface Product{
   category: Category
 }
 
+export interface CreateProductDTO extends Omit<Product, 'id' | 'category'>{
+  //esta interfaz la hacemos para que cuando mandemos a crear un producto el producto sea basado en este modelo
+  //no usamos la interfaz anterior porque los datos que se envian para crear el producto no siempre son los mismos
+  //que se reciben al hacer get, ya que el id por ejemplo lo asigna la api y no nosotros
+
+  categoryId: number
+
+  //lo que hicimos al hacer esta interfaz es heredar de la interfaz anterior omitiendo las cosas que no necesitamos
+  //como el id y la categoria, luego agregamos lo que necesitamos que no existe en Product (categoryId)
+  //de esta forma esta interface tiene todos los datos de Product, menos id y category y ademas tiene categoryId
+}
