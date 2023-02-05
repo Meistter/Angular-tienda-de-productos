@@ -15,8 +15,21 @@ export class ProductsComponent implements OnInit{
 }
 
   products: Product []= []
+
+  limit = 10
+  offset = 10 //empiezo con el offset en 10 porq la primera llamada (en el ngOnInit) empieza con el offset en cero, entonces se duplicarian los datos
+
   ngOnInit(): void{
-    this.producService.getAllProducts().subscribe(data => {this.products = data})
+    //ESTE ES NUESTRO METODO GETALL pero como añadimos paginacion entonces llamamos al getProductsByPage
+    //pero antes usaba getAllProducts().subscribe(data => {this.products = data})
+    this.producService.getProductsByPage(10,0).subscribe(data => {this.products = data})
+
+
+  }
+  //con este metodo cargamos mas datos en el array del dom (paginamos)
+  loadMore(){
+    this.producService.getProductsByPage(this.limit,this.offset).subscribe(data => {this.products = this.products.concat(data) //aqui concatenamos los datos para que no se sobreescriban en el array que vemos en el dom si no que carguen debajo
+      this.offset += this.limit})
   }
 
   today = new Date()

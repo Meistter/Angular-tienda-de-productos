@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 //este otro modulo tambien es el que nos permite hacer solicitudes a la Api
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,30 @@ export class ProductsService {
   private API = 'https://young-sands-07814.herokuapp.com/api/products'
   constructor(private http: HttpClient) { }
 
-  getAllProducts(){
+  getProducts(limit?: number, offset?: number){
+
+    //aqui crearemos parametros opcionales de forma que podemos usar este metodo para cargar todos los productos
+    //o para cargar paginando dependiendo si mandamos o no los parametros
+    //pero algo no funciona
+    let params = new HttpParams();
+    if (limit && offset){
+      params = params.set('limit', limit)
+      params = params.set('offset', offset)
+    }
     //nosotros estamos manejando los productos basados en un modelo que hicimos, por lo tanto para no tener errores
     //debemos indicarle a la peticion que lo que va a obtener es un array de tipo Product, y lo hacemos asi:
     // <Product[]>
-    return this.http.get<Product[]>(this.API)
+    return this.http.get<Product[]>(this.API, { params })
   }
 
   getProduct(id: string){
     return this.http.get<Product>(`${this.API}/${id}`)
+  }
+
+  getProductsByPage(limit: number, offset: number){
+    return this.http.get<Product[]>(`${this.API}`,{
+      params: {limit, offset}
+    })
   }
 
   create(data: CreateProductDTO){
