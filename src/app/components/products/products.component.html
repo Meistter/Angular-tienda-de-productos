@@ -10,6 +10,8 @@
     <app-img  [img]="productSelected.images[0]"></app-img>
 <!-- falta implementar swiper -->
     <p>{{productSelected.description}}</p>
+    <button (click)="updateProduct()">Editar</button>
+    <button (click)="deleteProduct()">Eliminar</button>
   </div>
 </div>
 

@@ -22,3 +22,16 @@ export interface CreateProductDTO extends Omit<Product, 'id' | 'category'>{
   //como el id y la categoria, luego agregamos lo que necesitamos que no existe en Product (categoryId)
   //de esta forma esta interface tiene todos los datos de Product, menos id y category y ademas tiene categoryId
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface UpdateProductDTO extends Partial<CreateProductDTO>{
+ //aqui hacemos no obligatorios los datos de la interfaz con ?
+  // title?: string
+  // price?: number
+  // description?: string
+  // images?: string[]
+  // categoryId: number
+
+  //pero para reutilzar codigo mejor extendemos de CreateProductDTO que casualmente tiene los mismos datos que necesitamos
+  // y con Partial le indicamos que todos son opcionales
+}

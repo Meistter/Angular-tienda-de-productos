@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateProductDTO, Product } from 'src/app/models/product.model';
+import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 @Component({
@@ -62,6 +62,29 @@ export class ProductsComponent implements OnInit{
   this.producService.create(product).subscribe(data=>{console.log('created',data)})
   }
 
+  updateProduct(){
+    const changes : UpdateProductDTO = {
+      title: 'La Arepa no es Colombiana',
+      price: 1000
+    }
+    const id = this.productSelected.id
+    //con esta forma actualizamos en la api y mostramos en consola
+    // this.producService.update(id, changes).subscribe(data=>{console.log('actualizacion',data);
+    //ahora debemos actualizar el array que tenemos cargado(mostrado) en nuestra web
+    this.producService.update(id, changes).subscribe(data=>{const productIndex = this.products.findIndex(item => item.id === this.productSelected.id)
+      this.products[productIndex] = data
+      this.showProductDetail = false
+      })
+  }
 
+  deleteProduct(){
+    const id = this.productSelected.id
+    this.producService.delete(id).subscribe(()=>{const productIndex = this.products.findIndex(item => item.id === id)
+        this.products.splice(productIndex, 1)
+        this.showProductDetail = false
+        console.log('eliminado');
+
+    })
+  }
 
 }

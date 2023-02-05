@@ -22,5 +22,15 @@ export class ProductsService {
 
   create(data: CreateProductDTO){
     return this.http.post<Product>(this.API, data) //data representa a los datos enviados por el body a la api
+  } //la solicitud post es de tipo producto ya que cuando hacemos post la api nos retorna el objeto ya grabado, y lo que nos retorna es similar a un get, entonces viene bajo el modelo Producto
+
+  update(id: string, data: any){
+    return this.http.put<Product>(`${this.API}/${id}`, data)
+  }
+
+  delete(id: string){
+    //esta api al eliminar no devuelve el producto que elimino si no un booleano diciendo si lo elimino o no
+    //por esto usamos boolean en lugar de Product
+    return this.http.delete<boolean>(`${this.API}/${id}`)
   }
 }
