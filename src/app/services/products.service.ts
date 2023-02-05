@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 //este otro modulo tambien es el que nos permite hacer solicitudes a la Api
 import { HttpClient } from '@angular/common/http';
-import { CreateProductDTO, Product } from '../models/product.model';
+import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +24,7 @@ export class ProductsService {
     return this.http.post<Product>(this.API, data) //data representa a los datos enviados por el body a la api
   } //la solicitud post es de tipo producto ya que cuando hacemos post la api nos retorna el objeto ya grabado, y lo que nos retorna es similar a un get, entonces viene bajo el modelo Producto
 
-  update(id: string, data: any){
+  update(id: string, data: UpdateProductDTO){
     return this.http.put<Product>(`${this.API}/${id}`, data)
   }
 
