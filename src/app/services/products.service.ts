@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 //este otro modulo tambien es el que nos permite hacer solicitudes a la Api
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
+import { retry } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +23,7 @@ export class ProductsService {
     //nosotros estamos manejando los productos basados en un modelo que hicimos, por lo tanto para no tener errores
     //debemos indicarle a la peticion que lo que va a obtener es un array de tipo Product, y lo hacemos asi:
     // <Product[]>
-    return this.http.get<Product[]>(this.API, { params })
+    return this.http.get<Product[]>(this.API, { params }).pipe(retry(3)) //el pipe nos permite implementar retry para reintentar el get en caso que falle
   }
 
   getProduct(id: string){
@@ -32,7 +33,7 @@ export class ProductsService {
   getProductsByPage(limit: number, offset: number){
     return this.http.get<Product[]>(`${this.API}`,{
       params: {limit, offset}
-    })
+    }).pipe(retry(3))
   }
 
   create(data: CreateProductDTO){
