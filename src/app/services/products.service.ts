@@ -7,7 +7,7 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductsService {
-  private API = 'https://young-sands-07814.herokuapp.com/api/products'
+  private API = '/api/products' //la url de la api fue establecida en el PROXY
   constructor(private http: HttpClient) { }
 
   getProducts(limit?: number, offset?: number){

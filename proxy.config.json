@@ -1,0 +1,10 @@
+{
+  "/api/*":{
+    "target": "https://young-sands-07814.herokuapp.com",
+    "secret": true,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "comentario": "Este proxy lo creamos para poder hacer solicitudes a la Api cuando no esta permitido hacerlas desde local por nuestro equipo de backend, usamos el proxy para simular que la peticion es enviada desde una url especifica(de produccion por ejemplo)"
+  }
+}
+
