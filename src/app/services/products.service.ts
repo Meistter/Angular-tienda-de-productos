@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
 import { retry } from 'rxjs/operators';
+
+import { environment } from 'src/environments/enviroment';
+//aqui no importamos el enviroment.prod porq angular sabe cuando estamos en produccion usa el correspondiente si no usa el de desarrollo (el normal)
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  private API = '/api/products' //la url de la api fue establecida en el PROXY
+  private API = `${environment.API}/api/products` //la url de la api fue establecida en el PROXY | tambien definimos la variable API en el ambiente de produccion para que tenga la URL de la API
   constructor(private http: HttpClient) { }
 
   getProducts(limit?: number, offset?: number){
