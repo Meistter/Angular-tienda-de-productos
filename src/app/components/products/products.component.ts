@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
+import  Swal  from 'sweetalert2'
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -18,6 +19,8 @@ export class ProductsComponent implements OnInit{
 
   limit = 10
   offset = 10 //empiezo con el offset en 10 porq la primera llamada (en el ngOnInit) empieza con el offset en cero, entonces se duplicarian los datos
+  statusDetail : 'loading' | 'success' | 'error' | 'init' = 'init'
+  //esto lo usamos para el control del error
 
   ngOnInit(): void{
     //ESTE ES NUESTRO METODO GETALL pero como añadimos paginacion entonces llamamos al getProductsByPage
@@ -36,6 +39,7 @@ export class ProductsComponent implements OnInit{
   date2 = new Date(2020, 1, 11)
   montoTotal = 0
   showProductDetail = false
+
   productSelected : Product = {
     id: '',
     title: '',
@@ -55,10 +59,25 @@ export class ProductsComponent implements OnInit{
   toggleProductDetail(){
     this.showProductDetail = !this.showProductDetail
   }
-  onShowDetail(id: string){ //aqui recibimos el id del producto que es emitido
-    this.producService.getProduct(id).subscribe(data => {this.productSelected = data; this.toggleProductDetail() //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
 
-  }) //en este caso la data solo la mostramos por consola
+  onShowDetail(id: string){ //aqui recibimos el id del producto que es emitido
+    this.statusDetail = 'loading' //al iniciar la funcion asignamos loading al statusDetail
+    this.toggleProductDetail() //lo llamamos aqui para que cuando este cargando igual abra la ventana
+
+    this.producService.getProduct(id).subscribe(data => {this.productSelected = data; this.toggleProductDetail(); this.statusDetail = 'success' //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
+    //en caso de exito estamos mostrando el statusDetail Success
+    }, response => {
+    // console.log(response.error.message)
+    this.statusDetail = 'error' //en caso de error mostramos el statusDetail correspondiente
+
+    //aqui mostraremos usando sweetalert el mensaje de error
+    Swal.fire({
+      title: response,
+      text: response,
+      icon: 'error',
+      confirmButtonText: 'Cool'
+    })
+  })
   }
 
   createNewProduct()

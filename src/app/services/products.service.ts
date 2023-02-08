@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 //este otro modulo tambien es el que nos permite hacer solicitudes a la Api
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
-import { retry } from 'rxjs/operators';
+import { retry, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 
 import { environment } from 'src/environments/enviroment';
 //aqui no importamos el enviroment.prod porq angular sabe cuando estamos en produccion usa el correspondiente si no usa el de desarrollo (el normal)
@@ -31,6 +33,16 @@ export class ProductsService {
 
   getProduct(id: string){
     return this.http.get<Product>(`${this.API}/${id}`)
+    .pipe(catchError((error: HttpErrorResponse) =>{
+      if (error.status === HttpStatusCode.NotFound){ //con HttpStatusCode podemos definir errores de forma mas amigable sin escribir error 404, 500 etc
+        return throwError('No encontrado')
+      }
+      if (error.status === HttpStatusCode.Unauthorized){ //al usar errores asi con mensjaes especificos se muestra mucho mejor al usuario cuando desde el componente validamos en caso de error y mostramos el error recibido, ya que el error llega es en forma del mensaje que definimos aqui
+        return throwError('No autorizado')
+      }
+      return throwError('Ups')
+    })
+    )
   }
 
   getProductsByPage(limit: number, offset: number){
