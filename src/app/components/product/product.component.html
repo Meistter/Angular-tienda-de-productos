@@ -2,6 +2,6 @@
 <h2>{{product.price | currency: '$'}}</h2>
 <!-- Esto es un PIPE, se usa solo en html -->
 <p>{{product.title }}</p>
-
+<p *ngIf="product.taxes"> IVA: {{product.taxes  | currency: 'Bs'}} </p>
 <button (click)="onAddToCart()">Agregar al Carrito</button>
 <button (click)="onShowDetail()">Ver Detalles</button>

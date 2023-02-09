@@ -12,12 +12,13 @@ export class ProductComponent {
     id: '',
     title: '',
     price: 0,
-    images: [],         //Lo que hacemos aqui es darle estado inicial al producto que recibiremos, esto nos evita posibles errores
+    images: [], //Lo que hacemos aqui es darle estado inicial al producto que recibiremos, esto nos evita posibles errores
     description: '',
     category: {
       id: '',
       name: ''
-    }
+    },
+    taxes: 10
   }
   @Output() addedProduct = new EventEmitter<Product>(); //Product representa el timpo de informacion a transmitir
   onAddToCart(){
