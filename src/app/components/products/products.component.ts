@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 import  Swal  from 'sweetalert2'
+import { zip } from 'rxjs';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -93,6 +95,30 @@ export class ProductsComponent implements OnInit{
 
   this.producService.create(product).subscribe(data=>{console.log('created',data)})
   }
+
+  //esto es recomendable hacerlo en el servicio
+//esto es un ejemplo de solucion a un callback hell
+  readAndUpdate(id: string){ //en esta funcion vemos un ejemplo de como evitar el callback hell
+    this.producService.getProduct(id)
+    .pipe(
+      switchMap((product) => this.producService.update(product.id, {title: 'change'})),
+      switchMap((product) => this.producService.update(product.id, {title: 'change'})), //estas serian las otras peticiones que haria en lugar del callback hell
+      switchMap((product) => this.producService.update(product.id, {title: 'change'})),
+
+      )
+      .subscribe(data => {
+        console.log(data); //y aqui manipularia la data final por la cual hice un callback hell
+      })
+      //este es un ejemplo cuando queremos enviar dos promesas al mismo tiempo sin hacer un callback Hell
+      zip(
+        this.producService.getProduct(id),
+        this.producService.update(id, {title: 'nuevo'})
+      ).subscribe(response => {
+        const read = response [0] //representa la respuesta del getProduct
+        const update = response [1] //representa la respuesta del update
+      })
+  }
+
 
   updateProduct(){
     const changes : UpdateProductDTO = {
