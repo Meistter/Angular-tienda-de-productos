@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/enviroment';
 import { User } from '../models/user.model';
 import { Auth } from '../models/auth.model';
@@ -7,7 +7,9 @@ import { Auth } from '../models/auth.model';
   providedIn: 'root'
 })
 export class AuthService {
+
   private API = `${environment.API}/api/auth`
+
   constructor(private http: HttpClient) { }
 
 
@@ -17,6 +19,14 @@ export class AuthService {
     })
   }
   profile(token: string){
-    return this.http.get<User>(`${this.API}/profile`) //aqui falta enviarle el token a la api
+    // const headers = new HttpHeaders();
+    // headers = headers.set('Autorization', `Bearer ${token}` )    //esta seria la forma dinámica de hacerlo
+    return this.http.get<User>(`${this.API}/profile`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+       // 'Content-Type': 'application/json'
+
+      }
+    })
   }
 }
