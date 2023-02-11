@@ -10,13 +10,8 @@ import { User } from 'src/app/models/user.model';
 export class NavComponent implements OnInit{
   counter = 0
   // email = ''
-  token = ''
-  profile: User = { //esto lo usamos para recibir el perfil del usuario al hacer login
-    id: '',
-    email: '',
-    password: '',
-    name: ''
-  }
+  profile: User | null = null  //esto lo usamos para recibir el perfil del usuario al hacer login
+
 
   constructor(private storeService: StoreService, private authService: AuthService){ }
 
@@ -36,22 +31,28 @@ export class NavComponent implements OnInit{
   }
 
   login(){
-    this.authService.login('meistter@gmail.com', '123123')
-    .subscribe(response => {
-      console.log(response.access_token);
-      this.token = response.access_token
-      this.getprofile()
-    })
-     //esto vendria a ser un callback hell
-  }
-  getprofile(){
-
-    this.authService.profile(this.token)
-    .subscribe(rsp =>{
-      console.log(rsp);
-      this.profile = rsp
-      console.log('este es el perfil',this.profile);
+    // this.authService.login('meistter@gmail.com', '123123')
+    // .subscribe(response => {
+    //   console.log(response.access_token);
+    //   this.token = response.access_token
+    //   this.getprofile()
+    // })
+     //esto vendria a ser un callback hell asi que pasamos la logica del get al servicio y aqui usamos una sola funcion
+    this.authService.loginAndGet('meistter@gmail.com', '123123')
+    .subscribe(rspUser => {
+      this.profile = rspUser
 
     })
-  }
+
+    }
+  // getprofile(){
+
+  //   this.authService.getprofile(this.token)
+  //   .subscribe(rsp =>{
+  //     console.log(rsp);
+  //     this.profile = rsp
+  //     console.log('este es el perfil',this.profile);
+
+  //   })
+  // }
 }

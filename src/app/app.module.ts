@@ -13,6 +13,7 @@ import { HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/c
 import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { HighlightDirective } from './directives/highlight.directive';
 
   ],
   //aqui estamos definiendo nuestro interceptor de tiempo para poder ser usado, esto se hace manualmente
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true},
+              {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
