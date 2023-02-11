@@ -10,14 +10,15 @@ export class ImgComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
   constructor(){
     //se ejecuta antes del render
     //no debemos poner funciones asincronas
-    console.log('constructor', 'imgValue =>', this.img);
+    // console.log('constructor', 'imgValue =>', this.img);
 
   }
   ngOnChanges(changes: SimpleChanges){
     //corre antes y durante el render
     //verifica los cambios en los INPUTS (verifica si cambian o se ejecutan)
-    console.log('ngOnChanges', 'imgValue =>', this.img);
-    console.log('cambios/changes', changes);
+    // console.log('ngOnChanges', 'imgValue =>', this.img);
+    console.log(); //console.log('cambios/changes', changes);
+
     //aqui se escuchan todos los cambios de todos los inputs pero si queremos uno especifico debemos convertir el input en un setInput
 
   }
@@ -25,14 +26,14 @@ export class ImgComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
     //before render
     //corre 1 sola vez
     //aqui si podemos llamar cosas asincronas
-    console.log('ngOnInit', 'imgValue =>', this.img);
+    // console.log('ngOnInit', 'imgValue =>', this.img);
     this.counterFn = window.setInterval(()=>{ //guardamos el setInterval en una variable para luego poder destruirlo
       this.counter ++;
     },1000)
   }
   ngAfterViewInit(){
     //corre despues del render
-    console.log('ngAfterViewInit');
+    console.log(); //console.log('ngAfterViewInit');
   }
   ngOnDestroy(){
     //al eliminar el componente
