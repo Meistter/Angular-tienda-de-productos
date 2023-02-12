@@ -4,6 +4,7 @@ import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angu
 import { CreateProductDTO, Product, UpdateProductDTO } from '../models/product.model';
 import { retry, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { checkTime } from '../interceptors/time.interceptor';
 //el operador map lo usamos para poder transformar los valores que nos llegan de la api
 
 import { environment } from 'src/environments/enviroment';
@@ -34,7 +35,7 @@ export class ProductsService {
   }
 
   getProduct(id: string){
-    return this.http.get<Product>(`${this.API}/${id}`)
+    return this.http.get<Product>(`${this.API}/${id}`,{context:checkTime()}) //este context es el contexto para ejecutar el interceptor de tiempo
     .pipe(catchError((error: HttpErrorResponse) =>{
       if (error.status === HttpStatusCode.NotFound){ //con HttpStatusCode podemos definir errores de forma mas amigable sin escribir error 404, 500 etc
         return throwError('No encontrado')
@@ -49,7 +50,7 @@ export class ProductsService {
 
   getProductsByPage(limit: number, offset: number){
     return this.http.get<Product[]>(`${this.API}`,{
-      params: {limit, offset}
+      params: {limit, offset}, context: checkTime() //al ejecutar esta funcion checkTime estamos pasando el valor del contexto del interceptor a true, de esta forma si ejecutará el interceptor
     }).pipe(retry(3),//el pipe nos permite implementar retry para reintentar el get en caso que falle
     map(products => products.map(item => { //la funcion map la importamos del rxjs pero la map interna es nativa de javascript, aqui lo que estamos es manipulando los datos que recibimos para sacar un nuevo dato calculado
       return {...item, taxes: .19 * item.price} //tomamos taxes y le asignamos item.price operandolo
