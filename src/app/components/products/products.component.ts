@@ -64,7 +64,7 @@ export class ProductsComponent implements OnInit{
 
   onShowDetail(id: string){ //aqui recibimos el id del producto que es emitido
     this.statusDetail = 'loading' //al iniciar la funcion asignamos loading al statusDetail
-    this.toggleProductDetail() //lo llamamos aqui para que cuando este cargando igual abra la ventana
+   // this.toggleProductDetail() //lo llamamos aqui para que cuando este cargando igual abra la ventana
 
     this.producService.getProduct(id).subscribe(data => {this.productSelected = data; this.toggleProductDetail(); this.statusDetail = 'success' //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
     //en caso de exito estamos mostrando el statusDetail Success

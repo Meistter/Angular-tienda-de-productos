@@ -1,7 +1,10 @@
-<app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img> <!-- aqui validamos con el ngIf que existan imagenes en el array antes de mostrarlas -->
-<h2>{{product.price | currency: '$'}}</h2>
+<div class="imgContainer">
+  <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img> <!-- aqui validamos con el ngIf que existan imagenes en el array antes de mostrarlas -->
+
+  <h2>{{product.price | currency: '$'}}</h2>
 <!-- Esto es un PIPE, se usa solo en html -->
 <p>{{product.title }}</p>
 <p *ngIf="product.taxes"> IVA: {{product.taxes  | currency: 'Bs'}} </p>
 <button (click)="onAddToCart()">Agregar al Carrito</button>
 <button (click)="onShowDetail()">Ver Detalles</button>
+</div>

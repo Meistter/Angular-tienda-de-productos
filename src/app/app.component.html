@@ -8,7 +8,9 @@
 <!-- <hr> -->
 <!--  -->
 <app-nav ></app-nav>
-<button (click)="createUser()">Crear Usuario</button>
+<!-- dejamos el app nav ya que es el mismo en todas las páginas -->
+<router-outlet></router-outlet>
+<!-- <button (click)="createUser()">Crear Usuario</button>
 <p>
 <a href="./assets/files/texto.txt" download="">Descargar el Texto</a>
 </p>
@@ -17,10 +19,12 @@
 </p>
 <p>
   <input type="file" (change)="onUpload($event)">
-  <!-- con esto subimos el archivo -->
+   con esto subimos el archivo
   <img *ngIf="uploadImage" [src]="uploadImage" alt="">
-</p>
-<app-products></app-products>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+</p> -->
+
+<!-- no renderizamos el app products porq se mostrara ahora dependiendo de la ruta, de nuestro router -->
+<!-- <app-products></app-products> -->
+
 
 
