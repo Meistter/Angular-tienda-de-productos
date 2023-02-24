@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { switchMap } from 'rxjs';
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
@@ -10,31 +10,34 @@ import { zip } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent{
   myShoppingCart: Product[] = [];
 
   constructor(private storeService: StoreService, private producService: ProductsService){
     this.myShoppingCart = this.storeService.getShoppingCart()
 }
 
-  products: Product []= []
+  @Input() products: Product []= []
 
   limit = 10
   offset = 10 //empiezo con el offset en 10 porq la primera llamada (en el ngOnInit) empieza con el offset en cero, entonces se duplicarian los datos
   statusDetail : 'loading' | 'success' | 'error' | 'init' = 'init'
   //esto lo usamos para el control del error
 
-  ngOnInit(): void{
-    //ESTE ES NUESTRO METODO GETALL pero como añadimos paginacion entonces llamamos al getProductsByPage
-    //pero antes usaba getAllProducts().subscribe(data => {this.products = data})
-    this.producService.getProductsByPage(10,0).subscribe(data => {this.products = data})
+  @Output() atLoadMore: EventEmitter<string> = new EventEmitter<string>();
+  // lo movimos al home
+  // ngOnInit(): void{
+  //   //ESTE ES NUESTRO METODO GETALL pero como añadimos paginacion entonces llamamos al getProductsByPage
+  //   //pero antes usaba getAllProducts().subscribe(data => {this.products = data})
+  //   this.producService.getProductsByPage(10,0).subscribe(data => {this.products = data})
 
 
-  }
+  // }
   //con este metodo cargamos mas datos en el array del dom (paginamos)
   loadMore(){
-    this.producService.getProductsByPage(this.limit,this.offset).subscribe(data => {this.products = this.products.concat(data) //aqui concatenamos los datos para que no se sobreescriban en el array que vemos en el dom si no que carguen debajo
-      this.offset += this.limit})
+    this.atLoadMore.emit()
+    // this.producService.getProductsByPage(this.limit,this.offset).subscribe(data => {this.products = this.products.concat(data) //aqui concatenamos los datos para que no se sobreescriban en el array que vemos en el dom si no que carguen debajo
+    //   this.offset += this.limit})
   }
 
   today = new Date()

@@ -15,6 +15,16 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  //Esta es una forma de hacerlo, que cuando la ruta este vacia cargue home, o que el home sea la ruta vacia, o que redireccione a home al estar vacia
+  // {
+  //   path: '',
+  //   component: HomeComponent
+  // },
+  {
     path: 'categoria',
     component: CategoryComponent
   },
