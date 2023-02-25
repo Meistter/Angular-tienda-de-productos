@@ -1,1 +1,4 @@
-<p>category works!</p>
+<div class="producto">
+<app-product [product]="producto" *ngFor="let producto of products"></app-product>
+<button (click)="loadMore()">Cargar Más</button>
+</div>

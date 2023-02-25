@@ -22,7 +22,7 @@ export class ProductsService {
     //o para cargar paginando dependiendo si mandamos o no los parametros
     //pero algo no funciona
     let params = new HttpParams();
-    if (limit && offset){
+    if (limit && offset != null){
       params = params.set('limit', limit)
       params = params.set('offset', offset)
     }
@@ -30,9 +30,15 @@ export class ProductsService {
     //debemos indicarle a la peticion que lo que va a obtener es un array de tipo Product, y lo hacemos asi:
     // <Product[]>
     return this.http.get<Product[]>(this.API, { params }).pipe(retry(3))
-
-
   }
+
+
+  //Esta funcion nos permite consultar las categorias dependiendo de su ID
+  apiCatUrl = `${environment.API}/api/categories/`
+  getProductsByCategory(id: string, limit: number, offset: number){ //A pesar de que esto es de categorias al final lo que retorna son productos asi que lo hacemos en este servicio
+    return this.http.get<Product[]>(`${this.apiCatUrl}/${id}/products`, { params: {limit, offset} }).pipe(retry(3))
+  }
+
 
   getProduct(id: string){
     return this.http.get<Product>(`${this.API}/${id}`,{context:checkTime()}) //este context es el contexto para ejecutar el interceptor de tiempo
