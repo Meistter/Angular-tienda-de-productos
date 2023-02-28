@@ -25,7 +25,7 @@ const routes: Routes = [
   //   component: HomeComponent
   // },
   {
-    path: 'categoria/:id',
+    path: 'category/:id',
     component: CategoryComponent
   },
   {

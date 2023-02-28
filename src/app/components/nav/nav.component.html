@@ -26,9 +26,13 @@
         <img src="./assets/svg/logo_yard_sale.svg" alt="logo">
       </a>
       <ul>
-        <li><a href="">All</a></li>
-        <li><a href="">Clothes</a></li>
-        <li><a href="">Electronics</a></li>
+        <li><a routerLinkActive="active" routerLink="home">Home</a></li>
+        <li *ngFor="let cat of categories">
+          <a routerLinkActive="active" [routerLink]="['category', cat.id]">{{cat.name}}</a>
+            <!-- Aqui usamos el routerLinkActive para aplicar la clase active la cual estiliza y resalta la categoria seleccionada, angular automaticamente aplica la clase a la categoria que seleccionamos -->
+            <!-- es necesario usar [routerLink[] para dirigirnos a esa categoria en lugar de href-->
+        </li>
+
       </ul>
     </nav>
 

@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service'; //importamos el StoreService para poder recibir la informacion
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { Category } from 'src/app/models/product.model';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -13,15 +15,19 @@ export class NavComponent implements OnInit{
   profile: User | null = null  //esto lo usamos para recibir el perfil del usuario al hacer login
 
 
-  constructor(private storeService: StoreService, private authService: AuthService){ }
+  constructor(private storeService: StoreService, private authService: AuthService, private categoriesService: CategoriesService){ }
 
   @Input() email = ''
+  categories: Category[] = []
 
   ngOnInit(): void{
     //aqui nos suscribiremos al servicio store para poder recibir su informacion
     this.storeService.myCart$.subscribe(products=> {
       this.counter = products.length //aqui le sacamos el tamaño al array que estamos recibiendo
     })
+
+    //Conseguimos las categorias para mostrarlas en la nav
+    this.getAllCategories()
   }
 
   showMenu = false
@@ -44,6 +50,10 @@ export class NavComponent implements OnInit{
 
     })
 
+    }
+
+    getAllCategories(){
+      this.categoriesService.getAll().subscribe(data=>{this.categories = data})
     }
   // getprofile(){
 
