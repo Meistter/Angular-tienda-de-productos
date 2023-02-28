@@ -22,6 +22,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
@@ -41,14 +43,16 @@ import { ProfileComponent } from './pages/profile/profile.component';
     LoginComponent,
     RegisterComponent,
     RecoveryComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProductDetailComponent
   ],
   imports: [
 
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SwiperModule
 
   ],
   //aqui estamos definiendo nuestro interceptor de tiempo para poder ser usado, esto se hace manualmente
