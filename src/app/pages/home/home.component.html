@@ -1,4 +1,4 @@
-<app-products [products]="products" (atLoadMore)="loadMore()"></app-products>
+<app-products [productId]="productId" [products]="products" (atLoadMore)="loadMore()"></app-products>
 <!-- no ponemos $event en el loadMore porque no estamos emitiendo informacion -->
 <!-- en esta logica le estamos avisando al padre cuando se presiona la tecla de cargar mas, le estamos avisando mediante la emision de atLoadMore, y el padre al recibir ejecuta la funcion loadMore() -->
 <!-- esto lo hacemos para reutilizar el componente, estamos sacando la lógica especifica hacia la api y dejando la lógica de proceso -->

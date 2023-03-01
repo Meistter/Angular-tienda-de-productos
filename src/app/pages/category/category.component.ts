@@ -13,12 +13,19 @@ export class CategoryComponent implements OnInit{
   constructor(private route: ActivatedRoute, private productService: ProductsService){}
   products: Product []= []
 
+  productId: string | null = null
   categoryId: string | null = null;
   limit = 10;
   offset = 0
 
 
   ngOnInit(): void{
+
+    this.route.queryParamMap.subscribe(params => { //obtenemos el id del producto en la URL de categoria para abrir el detalle
+      this.productId = params.get('product')
+
+
+    })
 
     //Aqui estamos usando el switchMap para evitar anidar .subscribes
     this.route.paramMap

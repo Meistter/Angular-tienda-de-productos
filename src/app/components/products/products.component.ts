@@ -16,8 +16,14 @@ export class ProductsComponent{
   constructor(private storeService: StoreService, private producService: ProductsService){
     this.myShoppingCart = this.storeService.getShoppingCart()
 }
-
+  @Input() onCategory = false
   @Input() products: Product []= []
+  // @Input() productId: string | null = null
+  @Input() set productId(id: string | null){ //con esto al usar el set estamos verificando en todo momento el productId, al recibirlo ejecuta
+    if (id)
+
+    this.onShowDetail(id)
+  }
 
   limit = 10
   offset = 10 //empiezo con el offset en 10 porq la primera llamada (en el ngOnInit) empieza con el offset en cero, entonces se duplicarian los datos
@@ -67,9 +73,12 @@ export class ProductsComponent{
 
   onShowDetail(id: string){ //aqui recibimos el id del producto que es emitido
     this.statusDetail = 'loading' //al iniciar la funcion asignamos loading al statusDetail
-   // this.toggleProductDetail() //lo llamamos aqui para que cuando este cargando igual abra la ventana
 
-    this.producService.getProduct(id).subscribe(data => {this.productSelected = data; this.toggleProductDetail(); this.statusDetail = 'success' //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
+
+    if (!this.showProductDetail){
+      this.showProductDetail = true
+    }
+    this.producService.getProduct(id).subscribe(data => {this.productSelected = data;  this.statusDetail = 'success' //y aqui hacemos la solicitud del producto al servicio que se comunica con la api
     //en caso de exito estamos mostrando el statusDetail Success
     }, response => {
     // console.log(response.error.message)

@@ -1,4 +1,5 @@
 <div class="producto">
 <app-product [product]="producto" *ngFor="let producto of products"></app-product>
 <button (click)="loadMore()">Cargar Más</button>
+<app-products [onCategory]="true"  [productId]="productId" ></app-products>
 </div>

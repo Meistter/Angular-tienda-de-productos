@@ -1,10 +1,13 @@
 <!-- <button (click)="createNewProduct()">create</button>
 <button (click)="onShowDetail('1414')">error</button> -->
-<div class="products--grid">
+<div *ngIf="!onCategory" class="products--grid">
+  <!-- esta condicion IF me permite usar este componente desde category sin imprimir esta parte del codigo, solo mostrar el detalle -->
   <app-product (showProduct)="onShowDetail($event)" (addedProduct)="onAddToShoppingCart($event)" [product]="product" *ngFor="let product of products"></app-product>
 <!-- aqui recibimos la emicion del id con el evento showProduct  y ejecutamos el onShowDetail enviandole el id-->
 <button (click)="loadMore()">Cargar Más</button>
 </div>
+
+<!-- detalle del producto -->
 <div class="product-detail" [class.active]="showProductDetail">
   {{statusDetail}}
   <div *ngIf="productSelected">
