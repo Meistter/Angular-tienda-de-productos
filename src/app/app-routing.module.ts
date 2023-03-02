@@ -20,8 +20,10 @@ const routes: Routes = [
 
   {
     path: '', //estamos haciendo uso del layout
+    //estamos usando el layout para tener un router-outlet dentro de otro de forma que el router-oulet padre pueda controlar el modulo privado y el publico, cada uno con sus hijos y paginas hijo
     component: LayoutComponent,
     children: [
+      //Los hijos heredan las propiedades de LayoutComponent
       {
         path: 'home',
         component: HomeComponent
