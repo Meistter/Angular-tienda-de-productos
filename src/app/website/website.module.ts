@@ -9,7 +9,6 @@ import { ReversePipe } from '../website/pipes/reverse.pipe';
 import { TimeAgoPipe } from '../website/pipes/time-ago.pipe';
 import { HighlightDirective } from '../website/directives/highlight.directive';
 import { HomeComponent } from '../website//pages/home/home.component';
-import { NotFoundComponent } from '../not-found/not-found.component';
 import { CategoryComponent } from '../website/pages/category/category.component';
 import { MycartComponent } from '../website/pages/mycart/mycart.component';
 import { LoginComponent } from '../website/pages/login/login.component';
@@ -29,7 +28,6 @@ import { LayoutComponent } from '../website/components/layout/layout.component';
     TimeAgoPipe,
     HighlightDirective,
     HomeComponent,
-    NotFoundComponent,
     CategoryComponent,
     MycartComponent,
     LoginComponent,

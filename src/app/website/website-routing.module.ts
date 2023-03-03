@@ -31,10 +31,6 @@ const routes: Routes = [
         component: CategoryComponent
       },
       {
-        path: 'notfound',
-        component: NotFoundComponent
-      },
-      {
         path: 'mycart',
         component: MycartComponent
       },
