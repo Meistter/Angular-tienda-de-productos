@@ -9,6 +9,10 @@ const routes: Routes = [
   //   component: HomeComponent
   // },
   {//aqui estamos importando el Modulo de administracion que creamos (cms)
+    path: '',
+    loadChildren: ()=> import('../app/website/website.module').then(m => m.WebsiteModule)
+  },
+  {//aqui estamos importando el Modulo de administracion que creamos (cms)
     path: 'admin',
     loadChildren: ()=> import('../app/cms/cms.module').then(m => m.CmsModule)
   },

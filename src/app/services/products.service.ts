@@ -34,7 +34,7 @@ export class ProductsService {
 
 
   //Esta funcion nos permite consultar las categorias dependiendo de su ID
-  apiCatUrl = `${environment.API}/api/categories/`
+  apiCatUrl = `${environment.API}/api/categories`
   getProductsByCategory(id: string, limit: number, offset: number){ //A pesar de que esto es de categorias al final lo que retorna son productos asi que lo hacemos en este servicio
     return this.http.get<Product[]>(`${this.apiCatUrl}/${id}/products`, { params: {limit, offset} }).pipe(retry(3))
   }

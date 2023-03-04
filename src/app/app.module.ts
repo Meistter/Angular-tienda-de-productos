@@ -7,7 +7,7 @@ import { TimeInterceptor } from './interceptors/time.interceptor'; //interceptor
 //Este modulo es el que nos permite hacer solicitudes (consumo) a una api
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { SwiperModule } from 'swiper/angular';
+
 import { NotFoundComponent } from './not-found/not-found.component';
 
 
@@ -25,8 +25,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     AppRoutingModule, //modulo para rutas
     FormsModule,
-    HttpClientModule,
-    SwiperModule
+    HttpClientModule
 
   ],
   //aqui estamos definiendo nuestro interceptor de tiempo para poder ser usado, esto se hace manualmente
