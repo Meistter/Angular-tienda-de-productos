@@ -28,7 +28,10 @@ const routes: Routes = [
       },
       { //De esta forma Category va a tener un Chunk.js independiente de home y de admin
         path: 'category', //esto lo hacemos asi ya que convertimos a category en un modulo independiente, porque? para separar la logica de category del resto de paginas lo que significa que cuando cargue home por ejemplo no va a cargar el JS de category, esto  aumenta muchisimo el rendimiento de la página web
-        loadChildren: ()=> import('./pages/category/category.module').then(m=> m.CategoryModule)
+        loadChildren: ()=> import('./pages/category/category.module').then(m=> m.CategoryModule),
+        data:{
+          preload: true
+        }
       },
       {
         path: 'mycart',
