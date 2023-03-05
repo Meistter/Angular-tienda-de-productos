@@ -7,8 +7,11 @@ import { TimeInterceptor } from './interceptors/time.interceptor'; //interceptor
 //Este modulo es el que nos permite hacer solicitudes (consumo) a una api
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-
 import { NotFoundComponent } from './not-found/not-found.component';
+
+//ESTE MODULO NO ES OFICIAL DE ANGULAR, nos permite CARGAR solo los Modulos que se muestran en pantalla en el momento, de esta forma se iran cargando a medida que le fuera posible al usuario acceder a él
+//el QuicklinkStrategy lo importamos en el routing
+import { QuicklinkModule} from 'ngx-quicklink';
 
 
 //Todas las importaciones de aqui las pasamos al routing del website ya que hicimos 2 aplicaciones independientes dentro de esta app
@@ -25,7 +28,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     AppRoutingModule, //modulo para rutas
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QuicklinkModule //Recordar: El Quicklink Module se debe importar en todos los app.modules donde queramos que se aplique la tecnica, en este caso en el principal y el de website
 
   ],
   //aqui estamos definiendo nuestro interceptor de tiempo para poder ser usado, esto se hace manualmente

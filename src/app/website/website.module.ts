@@ -12,6 +12,7 @@ import { ProductDetailComponent } from '../website/pages/product-detail/product-
 import { LayoutComponent } from '../website/components/layout/layout.component';
 import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
+import { QuicklinkModule} from 'ngx-quicklink';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     WebsiteRoutingModule,
     SwiperModule,
-    SharedModule
+    SharedModule,
+    QuicklinkModule //Este modulo nos permite cargar SOLO los modulos que se muestran en pantalla al usuario en el momento, es excelente, se importa en app.module y los app.modules hijos donde se quiera aplicar
 
   ]
 })
