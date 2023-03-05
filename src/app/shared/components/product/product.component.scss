@@ -4,4 +4,51 @@ p, h2{
 .imgContainer{
   margin: 10px;
   margin-top: 10px;
+  border: solid;
+  border-width: 1px;
+  border-radius: 8px;
+  border-color: #f5f4f4;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color:  #020202;
+}
+.price{
+  text-align: right;
+  margin: 10px;
+  margin-bottom: 0;
+}
+.iva{
+  margin-top: 0;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  color: #C7C7C7;
+}
+.titlePrice{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title{
+  font-size: 18px;
+  margin: 10px;
+}
+.botones{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+.botones button{
+
+  border: solid;
+  //
+  border-color: #ACD9B2;
+  border-width: 1px;
+  border-radius: 4px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  width: 140px;
+  height: 30px;
+  cursor: pointer;
 }

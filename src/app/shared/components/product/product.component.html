@@ -3,11 +3,16 @@
     <!-- con esto anterior hacemos que al dar click a la imagen del producto nos lleve a la página del producto -->
     <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img> <!-- aqui validamos con el ngIf que existan imagenes en el array antes de mostrarlas -->
   </a>
-  <h2>{{product.price | currency: '$'}}</h2>
+  <div class="titlePrice">
+  <p class="title">{{product.title }}</p>
+  <h2 class="price">{{product.price | currency: '$'}}</h2>
+  </div>
+  <p class="iva" *ngIf="product.taxes"> Taxes {{product.taxes  | currency: '$'}} </p>
 <!-- Esto es un PIPE, se usa solo en html -->
-<p>{{product.title }}</p>
-<p *ngIf="product.taxes"> IVA: {{product.taxes  | currency: 'Bs'}} </p>
+
+<div class="botones">
 <button (click)="onAddToCart()">Agregar al Carrito</button>
 <!-- <button (click)="onShowDetail()">Ver Detalles</button> -->
-<a routerLink="." [queryParams]="{product: product.id}">Ver Detalles</a>
+<button  routerLink="." [queryParams]="{product: product.id}">Ver Detalles</button>
+</div>
 </div>
