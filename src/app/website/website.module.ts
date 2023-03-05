@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NavComponent } from '../website/components/nav/nav.component';
 import { WebsiteRoutingModule } from './website-routing.module';
 import { HomeComponent } from '../website//pages/home/home.component';
-import { CategoryComponent } from '../website/pages/category/category.component';
 import { MycartComponent } from '../website/pages/mycart/mycart.component';
 import { LoginComponent } from '../website/pages/login/login.component';
 import { RegisterComponent } from '../website/pages/register/register.component';
@@ -18,7 +17,6 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     NavComponent,
     HomeComponent,
-    CategoryComponent,
     MycartComponent,
     LoginComponent,
     RegisterComponent,
