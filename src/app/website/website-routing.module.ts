@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../website/pages/home/home.component';
-import { CategoryComponent } from '../website/pages/category/category.component';
+
 import { MycartComponent } from '../website/pages/mycart/mycart.component';
 import { LoginComponent } from '../website/pages/login/login.component';
 import { RegisterComponent } from '../website/pages/register/register.component';
@@ -26,9 +26,9 @@ const routes: Routes = [
         redirectTo: '/home',
         pathMatch: 'full'
       },
-      {
-        path: 'category/:id',
-        component: CategoryComponent
+      { //De esta forma Category va a tener un Chunk.js independiente de home y de admin
+        path: 'category', //esto lo hacemos asi ya que convertimos a category en un modulo independiente, porque? para separar la logica de category del resto de paginas lo que significa que cuando cargue home por ejemplo no va a cargar el JS de category, esto  aumenta muchisimo el rendimiento de la página web
+        loadChildren: ()=> import('./pages/category/category.module').then(m=> m.CategoryModule)
       },
       {
         path: 'mycart',
