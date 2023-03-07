@@ -10,6 +10,8 @@ import { ProfileComponent } from '../website/pages/profile/profile.component';
 import { ProductDetailComponent } from '../website/pages/product-detail/product-detail.component';
 import { LayoutComponent } from '../website/components/layout/layout.component';
 
+import { AuthGuard } from '../guards/auth.guard';
+
 const routes: Routes = [
   {
     path: '', //estamos haciendo uso del layout
@@ -47,6 +49,8 @@ const routes: Routes = [
       },
       {
         path: 'profile',
+        canActivate: [AuthGuard], //Con esto estamos protegiendo con el guardian a la ruta, esto hace que depende de la configuracion del guardian al acceder a esta ruta sin un token el acceso sea denegado
+        //Esto es importantisimo y super necesario para validaciones en una página web
         component: ProfileComponent
       },
       {
