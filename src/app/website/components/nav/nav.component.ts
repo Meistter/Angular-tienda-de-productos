@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Category } from 'src/app/models/product.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -15,7 +16,7 @@ export class NavComponent implements OnInit{
   profile: User | null = null  //esto lo usamos para recibir el perfil del usuario al hacer login
 
 
-  constructor(private storeService: StoreService, private authService: AuthService, private categoriesService: CategoriesService){ }
+  constructor(private storeService: StoreService, private authService: AuthService, private categoriesService: CategoriesService, private router: Router){ }
 
   @Input() email = ''
   categories: Category[] = []
@@ -51,7 +52,11 @@ export class NavComponent implements OnInit{
     })
 
     }
-
+    logout(){
+      this.authService.logout()
+      this.profile = null
+      this.router.navigate(['/home']) //redireccionamos al usuario una vez lo deslogueemos
+    }
     getAllCategories(){
       this.categoriesService.getAll().subscribe(data=>{this.categories = data})
     }

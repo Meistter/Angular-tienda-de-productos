@@ -20,7 +20,9 @@ export class AuthService {
       email: email, password: password    //este es el body
     }).pipe(tap(response => this.tokenService.saveToken(response.access_token))) //response representa el token que regresa cuando hacemos login
   } //este ultimo metodo guarda el token en el localStorage
-
+  logout(){
+    this.tokenService.removeToken()
+  }
   getprofile(){
     // const headers = new HttpHeaders();
     // headers = headers.set('Autorization', `Bearer ${token}` )    //esta seria la forma dinámica de hacerlo

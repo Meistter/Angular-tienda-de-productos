@@ -7,6 +7,10 @@ import { Injectable } from '@angular/core';
 //este servicio se encarga de manipular el token y almacenarlo donde corresponda
 export class TokenService {
 
+  removeToken(){
+    localStorage.removeItem('token')
+  }
+
   saveToken(token: string){
     localStorage.setItem('token', token) //esto tambien seria posible en cookies
   }
