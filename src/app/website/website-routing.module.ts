@@ -9,6 +9,7 @@ import { RecoveryComponent } from '../website/pages/recovery/recovery.component'
 import { ProfileComponent } from '../website/pages/profile/profile.component';
 import { ProductDetailComponent } from '../website/pages/product-detail/product-detail.component';
 import { LayoutComponent } from '../website/components/layout/layout.component';
+import { ExitGuard } from '../guards/exit.guard';
 
 import { AuthGuard } from '../guards/auth.guard';
 
@@ -55,6 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
+        canDeactivate: [ExitGuard],
         component: RegisterComponent
       },
       {
