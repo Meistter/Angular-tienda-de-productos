@@ -10,7 +10,8 @@ import { TokenService } from '../services/token.service';
 
 
 //!Este guardian nos permitira permitir el ingreso al panel administrador solo a usuarios logueados que tengan de rol 'admin' !!!!
-
+//!El resto es redirigido al home, recordar que en el app-router le definimos a la ruta /admin el uso de este guardian y ingresaran las personas dependiendo si este
+//!Retorna true o false
 
 export class AdminGuard implements CanActivate {
   constructor(private tokenService: TokenService, private router: Router, private authService: AuthService){}
