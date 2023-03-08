@@ -25,7 +25,13 @@ export class NavComponent implements OnInit{
     //aqui nos suscribiremos al servicio store para poder recibir su informacion
     this.storeService.myCart$.subscribe(products=> {
       this.counter = products.length //aqui le sacamos el tamaño al array que estamos recibiendo
-    })
+      })
+
+
+      this.authService.user$.subscribe(data=>{
+        this.profile = data
+      })
+
 
     //Conseguimos las categorias para mostrarlas en la nav
     this.getAllCategories()
@@ -47,8 +53,8 @@ export class NavComponent implements OnInit{
      //esto vendria a ser un callback hell asi que pasamos la logica del get al servicio y aqui usamos una sola funcion
     this.authService.loginAndGet('meistter@gmail.com', '123123')
     .subscribe(rspUser => {
-      this.profile = rspUser
-
+      // this.profile = rspUser //ya no llenamos aqui la variable profile porq lo llenamos en el ngOnInit desde la variable de estado del usuarioo
+      this.router.navigate(['/profile'])
     })
 
     }

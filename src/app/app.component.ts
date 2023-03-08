@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 import { FilesService } from './services/files.service'; //servicio para la descarga y subida de archivos
+import { TokenService } from './services/token.service';
+import { Token } from '@angular/compiler';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { FilesService } from './services/files.service'; //servicio para la desc
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   imgParent = 'https://picsum.photos/200';
   widthP = '200'
   showImg = true;
@@ -17,6 +19,14 @@ export class AppComponent {
   uploadImage = ''
   // email = ''
 
+    ngOnInit(){
+      //!Aqui vamos a hacer la comunicacion con el servidor por unica vez para hacer login de forma que si existe un token de autenticacion logueemos al usuario y nos traigamos su informacion para ponerla en el estado del usuario y manejarla en todos los modulos
+      const token = this.tokenService.getToken()
+      if(token){  //Si tenemos el token del usuario almacenado en local Storage, entonces vamos y obtenemos el usuario con el getprofile, al hacer esto se guarda en el observable el usuario para mantener su estado en la aplicacion, al hacer esto entonces todos los componentes tienen acceso al usuario y el nav detecta al usuario y muestra sesión iniciada
+        this.authService.getprofile()
+        .subscribe()
+      }
+    }
   onLoaded(img: string){ //aqui como sabemos que se transmiten string debo recibir el evento como string
     console.log(`escucha del padre, url de la imagen ${img}`);
   }
@@ -28,7 +38,7 @@ export class AppComponent {
   // A MODO DE EJEMPLO Y PARA NO CREAR OTRO COMPONENTE USAMOS APP.COMPONENT PARA LA LOGICA, PERO LO CORRECTO ES UN COMPONENTE PARTICULAR
   constructor(
     // private authService: AuthService,
-    private usersService: UsersService, private fileService: FilesService
+    private usersService: UsersService, private fileService: FilesService, private tokenService: TokenService, private authService: AuthService
     ){ }
 
 
@@ -52,7 +62,7 @@ export class AppComponent {
       name: 'Meistter',
       email: 'meistter@gmail.com',
       password: '123123',
-      // role: 'customer'
+      role: 'customer'
     }).subscribe(response => {
       console.log(response);
     })

@@ -3,7 +3,7 @@ export interface User{
   name: string,
   email: string,
   password: string,
-  // role: 'customer'|'admin'
+  role: 'customer'|'admin'
 }
 export interface CreateUserDTO extends Omit<User, 'id'>{ //hacemos la interfaz omitiendo el id para la creacion
 
