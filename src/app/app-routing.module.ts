@@ -10,6 +10,7 @@ import { CustomPreloadService } from './services/custom-preload.service';
 //ESTE MODULO NO ES OFICIAL DE ANGULAR, nos permite CARGAR solo los Modulos que se muestran en pantalla en el momento, de esta forma se iran cargando a medida que le fuera posible al usuario acceder a él
 //el QuicklinkModule lo importamos en el app.module
 import { QuicklinkStrategy } from 'ngx-quicklink';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
   {//aqui estamos importando el Modulo de administracion que creamos (cms)
     path: 'admin',
+    canActivate: [AdminGuard],
     loadChildren: ()=> import('../app/cms/cms.module').then(m => m.CmsModule)
   },
   {//esta es la ruta para cuando no se encuentra la ruta, error 404, esto tiene que estar de ultimo en esta lista de rutas

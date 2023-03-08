@@ -51,7 +51,7 @@ export class NavComponent implements OnInit{
     //   this.getprofile()
     // })
      //esto vendria a ser un callback hell asi que pasamos la logica del get al servicio y aqui usamos una sola funcion
-    this.authService.loginAndGet('meistter@gmail.com', '123123')
+    this.authService.loginAndGet('meistter@gmail.com', '123123') //!la nueva version de la api falla, trae la informacion incorrecta del usuario
     .subscribe(rspUser => {
       // this.profile = rspUser //ya no llenamos aqui la variable profile porq lo llenamos en el ngOnInit desde la variable de estado del usuarioo
       this.router.navigate(['/profile'])
