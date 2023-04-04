@@ -28,8 +28,8 @@ export class AuthGuard implements CanActivate {
       return this.authService.user$
         .pipe(
           map(user => {
-            if(!user){
-              this.router.navigate(['/home']) //?Esto es llamar al estado, lo podemos hacer desde cualquier componente y asi saber si esta alguien logueado o no
+            if(!user){ //?Esto es llamar al estado, lo podemos hacer desde cualquier componente y asi saber si esta alguien logueado o no
+              this.router.navigate(['/home'])
               return false
             }
             return true
